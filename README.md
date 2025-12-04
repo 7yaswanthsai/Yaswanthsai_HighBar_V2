@@ -20,6 +20,98 @@ It goes beyond a simple heuristic pipeline and includes:
 
 -----
 
+# V2 Highlights (High-Bar Requirements)
+
+- Full **baseline vs current** comparator model  
+- InsightAgent upgraded to compute **absolute & relative deltas**, **impact scores**, **sample sizes**, and **segment-level evidence**
+- Strict **Evaluator V2** with:  
+  - recomputed confidence  
+  - sample-size validation  
+  - contradiction detection  
+  - structured reasons for each decision
+- End-to-end **observability layer**:  
+  - `run_<timestamp>/` folders per execution  
+  - structured `.jsonl` logs per agent  
+  - `baseline_agg.csv`, `current_agg.csv`, `report_summary.json`, `metrics.json`
+- Full test suite upgraded for V2 (10/10 passing)
+- Deterministic pipeline: seeded and fully reproducible
+
+---
+
+# Architecture Overview (V2 — 5–7 bullets)
+
+1. **Planner Agent**  
+   Interprets the user query and produces a structured task plan.
+
+2. **Data Agent**  
+   Loads CSV, validates schema, enforces types, detects drift, cleans numeric inputs, and produces dataset summaries.
+
+3. **Baseline vs Current Splitter**  
+   Splits data into historical (baseline) and recent (current) windows for performance delta computation.
+
+4. **Insight Agent V2**  
+   Compares metrics (CTR, ROAS, spend, impressions) between baseline and current, computes `delta_abs`, `delta_rel`, `impact`, `impact_score`, and collects segment-level evidence.
+
+5. **Evaluator Agent V2**  
+   Applies strict scoring rules: confidence recomputation, sample-size penalties, impact thresholds, evidence checks, contradiction detection, and returns structured decisions with reasons.
+
+6. **Creative Generator**  
+   Generates highly-targeted suggestions based on validated hypotheses and historic creative messages.
+
+7. **Orchestrator**  
+   Runs the entire pipeline and writes all outputs to a dedicated `run_<timestamp>/` directory with logs, snapshots, and metrics.
+
+---
+
+# Developer Guide — Where to Modify Components
+
+This section is included because High-Bar reviewers expect projects to be easy for another engineer to work on.
+
+### **1. Modify schema rules**
+`src/agents/data_agent.py`  
+- `EXPECTED_SCHEMA`  
+- `_validate_schema`  
+- `_detect_drift`  
+- `_clean_types`
+
+### **2. Change time-window logic (baseline vs current)**
+`src/agents/data_agent.py` → `split_baseline_current()`  
+(If you add forecasting windows, extend this function.)
+
+### **3. Modify how insights are generated**
+`src/agents/insight_agent.py`  
+- `_compute_metric_deltas`  
+- `_segment_analysis`  
+- `_score_impact`
+
+Add new metrics or business rules here.
+
+### **4. Modify evaluator rules**
+`src/agents/evaluator.py`  
+- `DEFAULTS` → thresholds  
+- `_validate_single` → strict logic  
+- `_sample_confidence`  
+- `_evidence_confidence`  
+- `_detect_contradiction`
+
+To add new evaluation criteria, modify these.
+
+### **5. Modify creative generation**
+`src/agents/creative_generator.py`  
+- `generate_for_campaigns`  
+- `extract_themes`  
+- `combine_phrases`
+
+### **6. Modify run flow**
+`src/orchestrator.py`  
+To add new steps or change pipeline order.
+
+### **7. Modify configuration**
+`config/config.yaml`  
+All thresholds, paths, drift mode, and seeds are configurable here.
+
+---
+
 ## 🚀 Quick Start
 
 Ensure you have **Python \>= 3.10**.
