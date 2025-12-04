@@ -218,7 +218,7 @@ creatives_file: "reports/creatives.json"
 
 -----
 
-## 🧠 Architecture Overview
+## 🧠 Detailed Architecture Breakdown
 
 A production-style multi-agent pipeline:
 
