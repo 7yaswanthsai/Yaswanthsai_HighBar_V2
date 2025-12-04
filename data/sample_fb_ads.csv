@@ -1,0 +1,7 @@
+campaign_name,adset_name,date,spend,impressions,clicks,ctr,purchases,revenue,roas,creative_type,creative_message,audience_type,platform,country
+ComfortFit_C1,A1,2025-01-01,120,10000,120,0.012,3,300,2.5,Image,"Soft cotton comfort briefs",Cold,Facebook,IN
+ComfortFit_C1,A1,2025-01-02,150,11000,115,0.010,2,250,1.66,Image,"Breathable everyday wear",Cold,Facebook,IN
+ComfortFit_C1,A1,2025-01-03,200,15000,100,0.006,1,120,0.60,Image,"Daily comfort for men",Cold,Instagram,IN
+PremiumWear_C2,A2,2025-01-01,300,20000,260,0.013,5,700,2.33,Video,"Luxury fit premium briefs",Warm,Facebook,IN
+PremiumWear_C2,A2,2025-01-02,350,23000,250,0.010,4,650,1.85,Video,"Upgrade your comfort",Warm,Instagram,IN
+PremiumWear_C2,A2,2025-01-03,400,25000,210,0.008,2,420,1.05,Video,"Feel premium every day",Warm,Facebook,IN

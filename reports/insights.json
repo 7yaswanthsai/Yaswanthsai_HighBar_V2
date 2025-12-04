@@ -1,0 +1,73 @@
+{
+  "query": "Test Query",
+  "plan": {
+    "query": "Test Query",
+    "tasks": [
+      {
+        "task": "load_data",
+        "description": "Load and summarize dataset"
+      },
+      {
+        "task": "generate_insights",
+        "description": "Create hypotheses explaining metric changes"
+      },
+      {
+        "task": "validate_insights",
+        "description": "Evaluate hypotheses using quantitative checks"
+      },
+      {
+        "task": "generate_creatives",
+        "description": "Suggest new creative directions for low-CTR campaigns"
+      },
+      {
+        "task": "compile_report",
+        "description": "Write final marketing insights report"
+      }
+    ]
+  },
+  "summary": {
+    "timeseries": [
+      {
+        "date": "2025-01-01T00:00:00",
+        "spend": 100,
+        "impressions": 1000,
+        "clicks": 10,
+        "purchases": 1,
+        "revenue": 100,
+        "ctr": 0.01,
+        "roas": 1.0
+      }
+    ],
+    "campaign_summary": [
+      {
+        "campaign_name": "C1",
+        "spend": 100,
+        "impressions": 1000,
+        "clicks": 10,
+        "purchases": 1,
+        "revenue": 100,
+        "ctr": 0.01,
+        "roas": 1.0
+      }
+    ],
+    "schema": {
+      "campaign_name": "object",
+      "adset_name": "object",
+      "date": "datetime64[ns]",
+      "spend": "int64",
+      "impressions": "int64",
+      "clicks": "int64",
+      "ctr": "float64",
+      "purchases": "int64",
+      "revenue": "int64",
+      "roas": "float64",
+      "creative_type": "object",
+      "creative_message": "object",
+      "audience_type": "object",
+      "platform": "object",
+      "country": "object"
+    }
+  },
+  "candidates": [],
+  "validated": []
+}
